@@ -1,8 +1,9 @@
 import React from 'react'
+import Header from '../Header'
 
 const Calculator = () => {
   return (
-    <div>Calculator</div>
+    <div>clac</div>
   )
 }
 
