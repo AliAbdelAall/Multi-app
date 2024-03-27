@@ -2,10 +2,7 @@ import React from 'react'
 import Header from '../Header'
 
 const Weather = () => {
-  const beirut = {
-    latitude: 33.8959203,
-    longitude: 35.47843
-  }
+  
   const getcityCoordinations = async (city) => {
     const apiKey = "yUwM3aTT9rKVJNFHkB7eFg==DXMCc2Esu4tFMBF0"
     const result = await fetch(`https://api.api-ninjas.com/v1/geocoding?city=${city}`, {
@@ -16,10 +13,19 @@ const Weather = () => {
       }
     })
     const response = await result.json()
-    console.log(response)
+
+    getWeatherCondition(response[0])
+
   }
       
   getcityCoordinations("beirut")
+
+  const getWeatherCondition = async ({ latitude, longitude }) => {
+    console.log(latitude, longitude)
+    const result = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&timezone=auto&forecast_days=3`)
+    const response = await result.json()
+    console.log(response)
+  }
 
 
   return(
