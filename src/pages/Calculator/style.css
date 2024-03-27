@@ -1,0 +1,41 @@
+.clac_container{
+  height: 87.2vh;
+  background-color: #ffe4c4;
+}
+
+.output{
+  background-color: #000000cc;
+  grid-column: 1 / -1;
+  padding: 15px 10px;
+
+}
+.caculator-wrapper{
+  display: grid;
+  grid-template-rows: minmax(95px , auto) repeat(5, 80px);
+  grid-template-columns: repeat(4, 80px);
+  background-color: #ffffff;
+  font-size: 20px;
+}
+
+.span-two{
+  grid-column: span 2;
+}
+
+.caculator-wrapper button{
+  font-size: 25px;
+  cursor: pointer;
+  border: 1px solid #000000da
+}
+
+.caculator-wrapper button:hover{
+  background-color: #b4b4b499;
+}
+
+
+.previous{
+  color: #ffffff99;
+}
+
+.current{
+  font-size: 30px;
+}
