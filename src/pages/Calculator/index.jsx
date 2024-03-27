@@ -8,7 +8,6 @@ const Calculator = () => {
   const [number, setNumber] = useState("0")
   const [previous, setPrevious] = useState("")
   const [operator, setOperator] = useState("")
-  const [result, setResult] = useState("")
 
 
   const calculateResult = () => {
@@ -60,11 +59,10 @@ const Calculator = () => {
   }
 
   const handleDelete = () => {
-    if(number !== "0"){
-      if(number <= "9"){
+    if(number === "0" || number.length === 1){
         setNumber("0")
       }
-    }else{
+      else{
       setNumber(number.slice(0, -1))
     }
   }
