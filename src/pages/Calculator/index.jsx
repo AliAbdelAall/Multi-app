@@ -8,14 +8,61 @@ const Calculator = () => {
   const [number, setNumber] = useState("0")
   const [previous, setPrevious] = useState("")
   const [operator, setOperator] = useState("")
+  const [result, setResult] = useState("")
+  const [isoperator, setIsOperator] = useState(false)
 
+  const calculateResult = () => {
+    if(operator && number && previous){
+      const firstNum = parseFloat(previous.slice(0, -2))
+      const secondNum = parseFloat(number)
+      console.log("i calc", operator, firstNum, secondNum)
+      switch(operator){
+        case "+":
+        setResult(String(firstNum + secondNum))
+        setPrevious("")
+        console.log(result)
+        break;
+        case "-":
+        setResult(String(firstNum - secondNum))
+        setPrevious("")
+        console.log(result)
+        break;
+        case "*":
+        setResult(String(firstNum * secondNum))
+        setPrevious("")
+        console.log(result)
+        break;
+        case "÷":
+        setResult(String(firstNum / secondNum))
+        setPrevious("")
+        console.log(result)
+        break;
+        default:
+          setNumber("")
+          break;
+      }
+      setIsOperator(true)
+    }
+  }
 
   const handleOperationClick = (operation) => {
     if (number !== "") {
-        calculateResult();
-        setOperator(operation);
-        setPrevious(number + " " + operation);
-        setNumber("");
+        calculateResult()
+        console.log(result)
+        setPrevious((isoperator ? result : number) + " " + operation)
+        setNumber("")
+        setOperator(operation)
+        setIsOperator(false)
+    }
+  }
+
+  const handleDelete = () => {
+    if(number !== "0"){
+      if(number <= "9"){
+        setNumber("0")
+      }
+    }else{
+      setNumber(number.slice(0, -1))
     }
   }
 
