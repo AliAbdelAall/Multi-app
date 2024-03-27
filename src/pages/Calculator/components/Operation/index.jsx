@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Operation = ({ operation }) => {
+const Operation = ({ operation, handleOperationClick }) => {
   return (
-    <button>{operation}</button>
+    <button onClick={() => {handleOperationClick(operation)}}>{operation}</button>
   )
 }
 

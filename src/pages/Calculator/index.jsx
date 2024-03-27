@@ -7,9 +7,20 @@ import Operation from './components/Operation'
 const Calculator = () => {
   const [number, setNumber] = useState("0")
   const [previous, setPrevious] = useState("")
+  const [operator, setOperator] = useState("")
+
+
+  const handleOperationClick = (operation) => {
+    if (number !== "") {
+        calculateResult();
+        setOperator(operation);
+        setPrevious(number + " " + operation);
+        setNumber("");
+    }
+  }
 
   const handleDigitClick = (digit) => {
-    if(number === "0"){
+    if(number === "0" || number == "Infinity"){
       setNumber(digit)
     }
     else{
@@ -23,27 +34,27 @@ const Calculator = () => {
     <div className='flex center clac_container'>
       <div className='caculator-wrapper'>
         <div className='flex column align-end space-between output'>
-          <div className='previous'> 12315*</div>
+          <div className='previous'>{previous}</div>
           <div className='current white'>{number}</div>
         </div>
-        <button className='span-two'>AC</button>
-        <button>DEL</button>
-        <Operation operation = "÷"/>
+        <button className='span-two' onClick={() => {setNumber("0"); setPrevious("")}}>AC</button>
+        <button onClick={handleDelete}>DEL</button>
+        <Operation operation = "÷" handleOperationClick={handleOperationClick}/>
         <Digit digit="1" handleDigitClick={handleDigitClick}/>
         <Digit digit="2" handleDigitClick={handleDigitClick}/>
         <Digit digit="3" handleDigitClick={handleDigitClick}/>
-        <Operation operation = "*"/>
+        <Operation operation = "*" handleOperationClick={handleOperationClick}/>
         <Digit digit="4" handleDigitClick={handleDigitClick}/>
         <Digit digit="5" handleDigitClick={handleDigitClick}/>
         <Digit digit="6" handleDigitClick={handleDigitClick}/>
-        <Operation operation = "+"/>
+        <Operation operation = "+" handleOperationClick={handleOperationClick}/>
         <Digit digit="7" handleDigitClick={handleDigitClick}/>
         <Digit digit="8" handleDigitClick={handleDigitClick}/>
         <Digit digit="9" handleDigitClick={handleDigitClick}/>
-        <Operation operation = "-"/>
+        <Operation operation = "-" handleOperationClick={handleOperationClick}/>
         <Digit digit="." handleDigitClick={handleDigitClick}/>
         <Digit digit="0" handleDigitClick={handleDigitClick}/>
-        <button className='span-two'>=</button>
+        <button className='span-two' on onClick={calculateResult}>=</button>
       </div>
     </div>
 
