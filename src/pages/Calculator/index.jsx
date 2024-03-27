@@ -8,8 +8,15 @@ const Calculator = () => {
   const [number, setNumber] = useState("0")
   const [previous, setPrevious] = useState("")
 
-  const handleDigitClick = () => {
-
+  const handleDigitClick = (digit) => {
+    if(number === "0"){
+      setNumber(digit)
+    }
+    else{
+      if (!(digit === "." && number.includes("."))) {
+        setNumber(number + digit);
+      }
+    }
   }
 
   return (
