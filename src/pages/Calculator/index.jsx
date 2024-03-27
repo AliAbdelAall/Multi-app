@@ -9,7 +9,7 @@ const Calculator = () => {
   const [previous, setPrevious] = useState("")
   const [operator, setOperator] = useState("")
   const [result, setResult] = useState("")
-  const [isoperator, setIsOperator] = useState(false)
+
 
   const calculateResult = () => {
     if(operator && number && previous){
@@ -41,19 +41,22 @@ const Calculator = () => {
           setNumber("")
           break;
       }
-      setIsOperator(true)
+
     }
   }
 
-  const handleOperationClick = (operation) => {
+  const handleOperation = (operation) => {
     if (number !== "") {
-        calculateResult()
-        console.log(result)
-        setPrevious((isoperator ? result : number) + " " + operation)
-        setNumber("")
-        setOperator(operation)
-        setIsOperator(false)
-    }
+      setPrevious(number + " " + operation)
+      setNumber("")
+      setOperator(operation)
+
+  }
+  }
+
+  const handleOperationClick =(operation) => {
+    calculateResult()
+    handleOperation(operation)
   }
 
   const handleDelete = () => {
