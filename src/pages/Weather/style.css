@@ -1,0 +1,41 @@
+.weather-container{
+  height: 86.2vh;
+  background-color: #fff4e4;
+}
+
+.weather-wrapper{
+  min-width: fit-content;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #808080;
+  padding: 20px;
+  width: 40%;
+}
+
+.weather-wrapper > p{
+  font-size: 24px;
+  color: #474747;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.input-wrapper{
+  gap: 5px;
+}
+
+.input-wrapper > input{
+  width: 100%;
+  padding: 10px 5px;
+  border-radius: 7px;
+  border: 1px solid #80808099;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-wrapper > button{
+  padding: 10px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
