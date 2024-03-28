@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import "../../styles/common/utilities.css"
 import "./style.css"
 import Digit from './components/Digit'
@@ -10,42 +11,59 @@ const Calculator = () => {
   const [operator, setOperator] = useState("")
 
 
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // did not use switch case here to avoid putting every case (all digits and operators )
+      const key = event.key;
+      if (!isNaN(key)) {
+        handleDigitClick(key);
+      } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        handleOperation(key);
+      } else if (key === 'Enter' || key === '=') {
+        calculateResult();
+      } else if (key === 'Backspace') {
+        handleDelete();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    // we remove the event listener to avoid repeating the listiner on every change
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [number, operator, previous]);
+
   const calculateResult = () => {
-    if(operator && number && previous){
-      const firstNum = parseFloat(previous.slice(0, -2))
+    if (operator && number && previous) {
+      const firstNum = parseFloat(previous.slice(0, -2));
       const secondNum = parseFloat(number)
-      console.log("i calc", operator, firstNum, secondNum)
-      switch(operator){
+      switch (operator) {
         case "+":
-        setResult(String(firstNum + secondNum))
-        setPrevious("")
-        console.log(result)
-        break;
+          setNumber(String(firstNum + secondNum))
+          break;
         case "-":
-        setResult(String(firstNum - secondNum))
-        setPrevious("")
-        console.log(result)
-        break;
+          setNumber(String(firstNum - secondNum))
+          break;
         case "*":
-        setResult(String(firstNum * secondNum))
-        setPrevious("")
-        console.log(result)
-        break;
+          setNumber(String(firstNum * secondNum))
+          break;
         case "÷":
-        setResult(String(firstNum / secondNum))
-        setPrevious("")
-        console.log(result)
-        break;
+          setNumber(String(firstNum / secondNum))
+          break;
+        case "/":
+          setNumber(String(firstNum / secondNum))
+          break;
         default:
           setNumber("")
           break;
       }
-
+      setPrevious("")
     }
-  }
+  };
 
   const handleOperation = (operation) => {
     if (number !== "") {
+      calculateResult()
       setPrevious(number + " " + operation)
       setNumber("")
       setOperator(operation)
