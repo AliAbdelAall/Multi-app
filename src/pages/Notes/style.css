@@ -1,0 +1,16 @@
+.notes-container{
+  width: 100vw;
+  height: 86.2vh;
+}
+
+.add-note{
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.add-note:hover{
+  opacity: 80%;
+}

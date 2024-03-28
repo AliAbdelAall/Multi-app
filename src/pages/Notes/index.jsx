@@ -1,9 +1,11 @@
 import React from 'react'
-import Header from '../Header'
+import "./style.css"
 
 const Notes = () => {
   return (
-    <div>note</div>
+    <div className='flex justify-center align-start notes-container'>
+      <button className='add-note bg-primary bold white no-bor'>Add Note</button>
+    </div>
   )
 }
 
