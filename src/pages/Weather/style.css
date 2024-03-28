@@ -32,10 +32,21 @@
   font-size: 16px;
 }
 
+.temp-wrapper{
+  gap: 15px;
+  font-size: 20px;
+  background-color: #ededed;
+  margin-top: 10px;
+}
+
 .input-wrapper > button{
   padding: 10px;
   border-radius: 7px;
   border: none;
   outline: none;
   font-size: 16px;
+}
+
+.temp-ele{
+  gap: 15px
 }

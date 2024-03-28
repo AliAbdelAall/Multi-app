@@ -7,6 +7,7 @@ const Weather = () => {
   const [after, setAfter] = useState({})
   const [unit, setUnit] = useState("")
   const [city, setCity] = useState("")
+  const [loaded, setloaded] = useState(false)
 
   
   const getcityCoordinations = async (city) => {
@@ -24,7 +25,6 @@ const Weather = () => {
 
   }
       
-  getcityCoordinations("beirut")
 
   const getWeatherCondition = async ({ latitude, longitude }) => {
 
@@ -35,20 +35,27 @@ const Weather = () => {
     calulateMinMax(tempArray, 0, 23, setToday)
     calulateMinMax(tempArray, 24, 47, setTomorrow)
     calulateMinMax(tempArray, 48, 71, setAfter)
+    setUnit(response.hourly_units.temperature_2m)
+    setloaded(true)
     console.log(response)
   }
 
   const calulateMinMax = (arr, stratIndex, endIndex, setState) => {
     const slicedArr = arr.slice(stratIndex, endIndex + 1)
     const parsedSlicedArr = slicedArr.map(Number)
-    const min = Math.min(parsedSlicedArr)
-    const max = Math.max(parsedSlicedArr)
+    const min = Math.min(...parsedSlicedArr)
+    const max = Math.max(...parsedSlicedArr)
     setState({
       min: min,
       max: max
     })
   }
 
+  const handleSearch = () => {
+    if(city.length >= 3){
+      getcityCoordinations(city)
+    }
+  }
 
   return(
   <div className='flex column center weather-container'>
@@ -56,14 +63,20 @@ const Weather = () => {
       <p>Search for any city in the world</p>      
       <div className='flex input-wrapper'>
         <input type="text" placeholder='Search for any city' onChange={(e)=>{setCity(e.target.value)}}/>
-        <button className='bg-primary bold white' onClick={()=>{getcityCoordinations(city)}}>Search</button>
+        <button className='bg-primary bold white' onClick={handleSearch}>Search</button>
       </div>
-      <div>
-        <div>Today</div>
-        <div>Tomorrow</div>
-        <div>After</div>
-
-      </div>
+      {loaded && <div className='flex center temp-wrapper'>
+        <div className='flex bold column temp-ele'>
+          <div>Today:</div>
+          <div>Tomorrow:</div>
+          <div>After:</div>
+        </div>
+        <div className='flex column temp-ele'>
+          <div>{`${today.min}${unit} - ${today.max}${unit}`}</div>
+          <div>{`${tomorrow.min}${unit} - ${tomorrow.max}${unit}`}</div>
+          <div>{`${after.min}${unit} - ${after.max}${unit}`}</div>
+        </div>
+      </div>}
     </div>
   </div>)
   
