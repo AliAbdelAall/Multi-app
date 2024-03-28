@@ -1,6 +1,7 @@
 .notes-container{
   width: 100vw;
   height: 86.2vh;
+  position: relative;
 }
 
 .add-note{

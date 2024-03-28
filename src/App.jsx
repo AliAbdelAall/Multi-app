@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./styles/common/utilities.css"
 import Header from "./pages/Header";
 import Weather from "./pages/Weather";
 import Calculator from "./pages/Calculator";
