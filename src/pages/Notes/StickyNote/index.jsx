@@ -3,6 +3,17 @@ import Draggable from 'react-draggable';
 import "./style.css";
 
 const Note = ({ index, note, notes, setNotes }) => {
+  const [content, setContent] = useState(note.content)
+  const noteRef = useRef(null)
+
+  const handleContentChange = (e) => {
+    setContent(e.target.value)
+    const updatedNotes = [...notes]
+    updatedNotes[index].content = e.target.value
+    setNotes(updatedNotes)
+  };
+
+  
 
   return (
     <Draggable defaultPosition={note.position} onStop={(e, data) => {
