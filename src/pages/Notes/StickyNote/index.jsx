@@ -13,7 +13,10 @@ const Note = ({ index, note, notes, setNotes }) => {
     setNotes(updatedNotes)
   };
 
-  
+  const handleDeleteNote = () => {
+    const updatedNotes = notes.filter((_, i) => i !== index)
+    setNotes(updatedNotes)
+  };
 
   return (
     <Draggable defaultPosition={note.position} onStop={(e, data) => {
